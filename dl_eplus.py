@@ -6,9 +6,9 @@ from driver import chrome, process
 from proxy import ProxyOption
 from util import cleanup_download_temporary_cache, validate, create_folder
 
-m3u8_url = 'https://vod.live.eplus.jp/out/v1/42e6cc071c4c4be287c81b64a2be026b/3f985423b8bc2463038339e21fac6b7a/index_4.m3u8'  # m3u8地址
-ts_host_url = 'https://vod.live.eplus.jp/out/v1/42e6cc071c4c4be287c81b64a2be026b/3f985423b8bc2463038339e21fac6b7a/'  # ts文件地址前缀
-view_url = 'https://live.eplus.jp/ex/player?ib=XVzwSoPxJwVjp00CAv4iSHS7b132qeBhrFE3cupthhsjVFCHdV0xxe3yj2ydC4OTbWKnHL%2FIH6zqp1cBdZUxiA%3D%3D&show_id=2331407'  # eplus视听地址
+m3u8_url = ''  # m3u8地址
+ts_host_url = ''  # ts文件地址前缀
+view_url = ''  # eplus视听地址
 download_dir = 'D:/Video/ts_video'
 
 
