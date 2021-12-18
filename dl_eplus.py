@@ -13,7 +13,7 @@ download_dir = 'D:/Video/ts_video'
 
 
 def main():
-    driver = chrome(download_dir, proxy=ProxyOption())
+    driver = chrome(download_dir, None)
     driver.get(view_url)
     driver.get(m3u8_url)
     process(driver=driver, download_dir=download_dir, m3u8_url=m3u8_url,
