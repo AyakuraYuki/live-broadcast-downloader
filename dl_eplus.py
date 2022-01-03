@@ -17,7 +17,7 @@ def main():
     driver.get(view_url)
     driver.get(m3u8_url)
     process(driver=driver, download_dir=download_dir, m3u8_url=m3u8_url,
-            ts_host_url=ts_host_url)
+            ts_host_url=ts_host_url, min_wait=10, max_wait=30)
 
 
 if __name__ == '__main__':
