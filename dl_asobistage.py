@@ -15,8 +15,9 @@ download_dir = 'D:/Video/ts_video'
 def main():
     driver = chrome(download_dir=download_dir, proxy=ProxyOption())
     driver.get(key_url)
+    driver.get(m3u8_url)
     process(driver=driver, download_dir=download_dir, m3u8_url=m3u8_url,
-            ts_host_url=ts_host_url)
+            ts_host_url=ts_host_url, min_wait=5, max_wait=15)
 
 
 if __name__ == '__main__':
@@ -29,7 +30,7 @@ if __name__ == '__main__':
             print('Exception occurred, restarting...')
             print(f'Error: {e}')
             cleanup_download_temporary_cache(download_dir)
-            sleep(100)
+            sleep(10)
         else:
             break
     validate(download_dir)
