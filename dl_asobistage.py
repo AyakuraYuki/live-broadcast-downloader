@@ -18,8 +18,7 @@ def main():
     driver = chrome(download_dir=download_dir, proxy=ProxyOption())
     driver.get(key_url)
     driver.get(m3u8_url)
-    process(driver=driver, download_dir=download_dir, m3u8_url=m3u8_url,
-            ts_host_url=ts_host_url, min_wait=5, max_wait=15)
+    process(driver=driver, dest_dir=download_dir, m3u8_url=m3u8_url, host_url=ts_host_url, min_wait=5, max_wait=15)
 
 
 if __name__ == '__main__':

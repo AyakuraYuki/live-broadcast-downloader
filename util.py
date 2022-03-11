@@ -2,14 +2,16 @@
 
 import os
 
+from model import TSLink
+
 
 def parse_m3u8(filename):
     _ts_paths = []
     with open(filename) as f:
         for line in f.readlines():
             line = line.strip()
-            if line.endswith('.ts'):
-                _ts_paths.append(line)
+            if '.ts' in line:
+                _ts_paths.append(TSLink(line))
     return _ts_paths
 
 
@@ -34,16 +36,16 @@ def validate(path: str):
         exit(1)
 
     downloaded_files = os.listdir(path)
-    ts_paths = []
+    ts_links = []
     for file in downloaded_files:
         if file.endswith('m3u8'):
-            ts_paths = parse_m3u8(os.path.join(path, file))
+            ts_links = parse_m3u8(os.path.join(path, file))
 
     missing_amount = 0
-    for ts_filename in ts_paths:
-        full_path = os.path.join(path, ts_filename)
+    for ts_link in ts_links:
+        full_path = os.path.join(path, ts_link.filename)
         if not os.path.exists(full_path):
-            print(f'[Error] missing file: {ts_filename}')
+            print(f'[Error] missing file: {ts_link}')
             missing_amount += 1
 
     if not missing_amount:
