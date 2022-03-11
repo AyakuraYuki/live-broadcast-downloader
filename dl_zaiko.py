@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 
+import os
 from time import sleep
 
 from driver import chrome, process
 from proxy import ProxyOption
 from util import cleanup_download_temporary_cache, validate, create_folder
 
-m3u8_url = 'https://d6rahdpjywhoa.cloudfront.net/event_a690e9d9269369e8f2b3825799d27a371df134c0c6aa55cf66de46ed4b9b8ad1_1/index_4.m3u8'
-ts_host = 'https://d6rahdpjywhoa.cloudfront.net/event_a690e9d9269369e8f2b3825799d27a371df134c0c6aa55cf66de46ed4b9b8ad1_1/'
-download_dir = 'C:/Users/sakur/Videos/ts_video'
+m3u8_url = ''
+ts_host = ''
+user_home = os.path.expanduser('~')
+download_dir = os.path.join(user_home, 'Videos', 'ts_video_zaiko')
 
 
 def main():
     driver = chrome(download_dir, proxy=ProxyOption())
     driver.get(m3u8_url)
-    process(driver=driver, download_dir=download_dir, m3u8_url=m3u8_url,
-            ts_host_url=ts_host, min_wait=10, max_wait=20)
+    process(driver=driver, download_dir=download_dir, m3u8_url=m3u8_url, ts_host_url=ts_host, min_wait=5, max_wait=20)
 
 
 if __name__ == '__main__':

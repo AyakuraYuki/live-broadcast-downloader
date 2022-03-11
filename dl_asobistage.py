@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 from time import sleep
 
 from driver import chrome, process
@@ -9,7 +10,8 @@ from util import cleanup_download_temporary_cache, validate, create_folder
 m3u8_url = ''  # m3u8地址
 ts_host_url = ''  # ts文件地址前缀
 key_url = ''  # AES-128 Key地址
-download_dir = 'D:/Video/ts_video'
+user_home = os.path.expanduser('~')
+download_dir = os.path.join(user_home, 'Videos', 'ts_video_asobistage')
 
 
 def main():
