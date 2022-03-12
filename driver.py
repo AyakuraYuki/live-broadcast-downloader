@@ -28,6 +28,8 @@ def chrome(download_dir: str, proxy: ProxyOption):
 
 def download_ts(driver: webdriver.Chrome, ts_link: TSLink, download_dir: str, ts_host_url: str):
     path = os.path.join(download_dir, ts_link.filename)
+    if ts_host_url is not None and ts_host_url != "" and not ts_host_url.endswith('/'):
+        ts_host_url = f'{ts_host_url}/'
     if os.path.exists(path):
         print(f'[message] skip exist file: {path}')
         return False
