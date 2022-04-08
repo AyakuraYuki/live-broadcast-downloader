@@ -7,9 +7,12 @@ from driver import chrome, process
 from proxy import ProxyOption
 from util import cleanup_download_temporary_cache, validate, create_folder
 
-m3u8_url = ''  # m3u8地址
-ts_host_url = ''  # ts文件地址前缀
-view_url = ''  # eplus视听地址
+# link of .m3u8 file
+m3u8_url = ''
+# prefix of *.ts file (ts link: `https://example.com/1080p_1.ts` -> ts_host_url: `https://example.com/`)
+ts_host_url = ''
+# eplus viewing page url
+view_url = ''
 user_home = os.path.expanduser('~')
 download_dir = os.path.join(user_home, 'Videos', 'ts_video_eplus')
 
@@ -35,5 +38,6 @@ if __name__ == '__main__':
         else:
             break
     validate(download_dir)
-    # 手动合并（进入下载文件夹）：ffmpeg -i index_4.m3u8 -c copy output.mp4
     print('Done!')
+    # then jump into the download folder and fire this cmd:
+    #     ffmpeg -i <m3u8_filename> -c copy output.mp4

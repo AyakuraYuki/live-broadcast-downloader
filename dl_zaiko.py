@@ -33,5 +33,6 @@ if __name__ == '__main__':
         else:
             break
     validate(download_dir)
-    # 手动合并（进入下载文件夹）：ffmpeg -i index_4.m3u8 -c copy output.mp4
     print('Done!')
+    # then jump into the download folder and fire this cmd:
+    #     ffmpeg -i <m3u8_filename> -c copy output.mp4
