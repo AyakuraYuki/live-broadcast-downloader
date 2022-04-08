@@ -7,11 +7,8 @@ from driver import chrome, process
 from proxy import ProxyOption
 from util import cleanup_download_temporary_cache, create_folder, validate
 
-m3u8_url = 'https://nhks-vh.akamaihd.net/i/radioondemand/r/1257/s/stream_1257_1c8ba006216e7d2edb48490f1b9f2127.mp4/' \
-           'index_0_a.m3u8' \
-           '?null=0&id=AgB3UhjT0pWHCkZkK2J9wZ78ZYnqFFoGg40kAcgmb59x1lqR0zDW4ZqkoMg4NEEBnecR2qVIIi1aFg%3d%3d'
-key_url = 'https://nhks-vh.akamaihd.net/i/radioondemand/r/1257/s/stream_1257_1c8ba006216e7d2edb48490f1b9f2127.mp4/' \
-          'crypt.key?null=0&id=AgB3UhjT0pWHCkZkK2J9wZ78ZYnqFFoGg40kAcgmb59x1lqR0zDW4ZqkoMg4NEEBnecR2qVIIi1aFg%3d%3d'
+m3u8_url = ''
+key_url = ''
 user_home = os.path.expanduser('~')
 download_dir = os.path.join(user_home, 'Music', 'ts_radio_music_life')
 
