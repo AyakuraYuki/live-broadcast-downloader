@@ -1,2 +1,5 @@
 alive_progress
 selenium
+pysock
+requests
+requests[socks]
