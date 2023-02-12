@@ -30,3 +30,12 @@ class TSLink:
 
     def __str__(self):
         return json.dumps(self.__dict__)
+
+
+class Task:
+    def __init__(self, prefix, download_dir):
+        self.prefix = prefix
+        self.download_dir = download_dir
+
+    def __str__(self):
+        return json.dumps(self.__dict__)

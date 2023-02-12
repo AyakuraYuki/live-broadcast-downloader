@@ -47,7 +47,7 @@ def process(driver: webdriver.Chrome, dest_dir: str, m3u8_url: str,
     for path in alive_it(ts_paths, bar='fish', spinner='stars', length=60):
         if download_ts(driver, path, dest_dir, host_url):
             downloading += 1
-        if downloading == 20:
+        if downloading == 50:
             wait = random.randint(min_wait, max_wait)
             print(f'[message] cool down in {wait} seconds')
             sleep(wait)

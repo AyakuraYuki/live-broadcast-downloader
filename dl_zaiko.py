@@ -7,8 +7,8 @@ from driver import chrome, process
 from proxy import ProxyOption
 from util import cleanup_download_temporary_cache, validate, create_folder
 
-m3u8_url = ''
 ts_host = ''
+m3u8_url = f'{ts_host}index_4.m3u8'
 user_home = os.path.expanduser('~')
 download_dir = os.path.join(user_home, 'Videos', 'ts_video_zaiko')
 
