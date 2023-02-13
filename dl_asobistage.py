@@ -13,7 +13,7 @@ resolution_540p = M3U8Spec(m3u8_filename='index_1m.m3u8', key_name='aes128.key')
 resolution_270p = M3U8Spec(m3u8_filename='index_500k.m3u8', key_name='aes128.key')
 
 tasks = [
-    Task(prefix='https://host.example.net/path-to-m3u8_ts_key/', download_dir='<download_place>', m3u8_spec=resolution_1080p),
+    Task(prefix='', download_dir='', m3u8_spec=resolution_1080p),
 ]
 
 

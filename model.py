@@ -50,7 +50,7 @@ class M3U8Spec(object):
 
 
 class Task(object):
-    def __init__(self, prefix, m3u8_filename, download_dir, view_url='', key_name='', m3u8_spec: M3U8Spec = None):
+    def __init__(self, prefix, download_dir, view_url='', m3u8_filename='', key_name='', m3u8_spec: M3U8Spec = None):
         """
         init Task
 
