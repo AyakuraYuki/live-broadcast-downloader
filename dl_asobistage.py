@@ -3,21 +3,25 @@
 from time import sleep
 
 from driver import chrome, process
+from model import M3U8Spec, Task
 from proxy import ProxyOption
 from util import cleanup_download_temporary_cache, validate, create_folder
 
+resolution_1080p = M3U8Spec(m3u8_filename='index_6m.m3u8', key_name='aes128.key')
+resolution_720p = M3U8Spec(m3u8_filename='index_2m.m3u8', key_name='aes128.key')
+resolution_540p = M3U8Spec(m3u8_filename='index_1m.m3u8', key_name='aes128.key')
+resolution_270p = M3U8Spec(m3u8_filename='index_500k.m3u8', key_name='aes128.key')
+
 tasks = [
-    # Task(prefix='https://host.example.net/path-to-m3u8_ts_key/', download_dir='<download_place>'),
+    Task(prefix='https://host.example.net/path-to-m3u8_ts_key/', download_dir='<download_place>', m3u8_spec=resolution_1080p),
 ]
 
 
-def task(prefix, download_dir):
-    key_url = f'{prefix}aes128.key'
-    m3u8_url = f'{prefix}index_6m.m3u8'
-    driver = chrome(download_dir=download_dir, proxy=ProxyOption())
-    driver.get(key_url)
-    driver.get(m3u8_url)
-    process(driver=driver, dest_dir=download_dir, m3u8_url=m3u8_url, host_url=prefix, min_wait=3, max_wait=5)
+def task(t: Task):
+    driver = chrome(download_dir=t.download_dir, proxy=ProxyOption())
+    driver.get(t.key_url())
+    driver.get(t.m3u8_url())
+    process(driver=driver, dest_dir=t.download_dir, m3u8_url=t.m3u8_url(), host_url=t.prefix, min_wait=3, max_wait=5)
 
 
 def main():
@@ -29,7 +33,7 @@ def main():
             try:
                 cleanup_download_temporary_cache(t.download_dir)
                 print(f'task start: {t.prefix}')
-                task(t.prefix, t.download_dir)
+                task(t)
             except Exception as e:
                 print('Exception occurred, restarting...')
                 print(f'Error: {e}')
