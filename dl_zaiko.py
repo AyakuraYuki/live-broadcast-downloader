@@ -2,20 +2,20 @@
 
 from time import sleep
 
-from driver import chrome, process
+from driver import edge, process
 from model import Task, M3U8Spec
 from proxy import ProxyOption
 from util import cleanup_download_temporary_cache, validate, create_folder
 
-spec = M3U8Spec(m3u8_filename='index_4.m3u8')
+spec = M3U8Spec(m3u8_filename='index_4.m3u8', key_name='')
 
 tasks = [
-    Task(prefix='', download_dir='', m3u8_spec=spec)
+    Task(prefix='https://d6rahdpjywhoa.cloudfront.net/event_a690e9d9269369e8f2b3825799d27a371df134c0c6aa55cf66de46ed4b9b8ad1_1/', download_dir='/Users/ayakurayuki/Desktop', m3u8_spec=spec)
 ]
 
 
 def task(t: Task):
-    driver = chrome(t.download_dir, proxy=ProxyOption())
+    driver = edge(t.download_dir, proxy=ProxyOption(), executable_path='./msedgedriver')
     driver.get(t.m3u8_url())
     process(driver=driver, dest_dir=t.download_dir, m3u8_url=t.m3u8_url(), host_url=t.prefix, min_wait=5, max_wait=20)
 
