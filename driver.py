@@ -17,6 +17,8 @@ from model import TSLink
 from proxy import ProxyOption
 from util import parse_m3u8
 
+os.environ['WDM_LOCAL'] = '1'
+
 
 def _build_prefs(download_dir: str):
     prefs = {
@@ -30,22 +32,22 @@ def _build_prefs(download_dir: str):
 
 def chrome(download_dir: str, proxy: ProxyOption):
     chrome_options = ChromeOptions()
-    prefs = _build_prefs(download_dir)
-    chrome_options.add_experimental_option("prefs", prefs)
     if proxy:
         chrome_options.add_argument(f"--proxy-server={proxy.get_proxy_server()}")
     chrome_options.add_argument("--headless")
+    prefs = _build_prefs(download_dir)
+    chrome_options.add_experimental_option("prefs", prefs)
     chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
     return Chrome(service=chrome_service, options=chrome_options)
 
 
 def edge(download_dir: str, proxy: ProxyOption):
     edge_options = EdgeOptions()
-    prefs = _build_prefs(download_dir)
-    edge_options.add_experimental_option("prefs", prefs)
     if proxy:
         edge_options.add_argument(f"--proxy-server={proxy.get_proxy_server()}")
-    edge_options.add_argument("--headless")
+    edge_options.add_argument("headless")
+    prefs = _build_prefs(download_dir)
+    edge_options.add_experimental_option("prefs", prefs)
     edge_service = EdgeService(executable_path=EdgeChromiumDriverManager().install())
     return Edge(service=edge_service, options=edge_options)
 
