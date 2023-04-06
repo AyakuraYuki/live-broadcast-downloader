@@ -1,5 +1,6 @@
 alive_progress
 selenium
+webdriver-manager
 pysock
 requests
 requests[socks]

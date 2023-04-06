@@ -7,37 +7,47 @@ from time import sleep
 from alive_progress import alive_it
 from selenium.webdriver import Chrome, Edge
 from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.edge.options import Options as EdgeOptions
+from selenium.webdriver.edge.service import Service as EdgeService
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 from model import TSLink
 from proxy import ProxyOption
 from util import parse_m3u8
 
 
-def chrome(download_dir: str, proxy: ProxyOption, executable_path: str = "chromedriver"):
-    chrome_options = ChromeOptions()
-    chrome_options.add_experimental_option("prefs", {
+def _build_prefs(download_dir: str):
+    prefs = {
         "download.default_directory": download_dir,
-        "download.prompt_for_download": False,
         "download.directory_upgrade": True,
-    })
+        "download.prompt_for_download": False,
+        "download.extensions_to_open": ""
+    }
+    return prefs
+
+
+def chrome(download_dir: str, proxy: ProxyOption):
+    chrome_options = ChromeOptions()
+    prefs = _build_prefs(download_dir)
+    chrome_options.add_experimental_option("prefs", prefs)
     if proxy:
         chrome_options.add_argument(f"--proxy-server={proxy.get_proxy_server()}")
     chrome_options.add_argument("--headless")
-    return Chrome(executable_path=executable_path, options=chrome_options)
+    chrome_service = ChromeService(executable_path=ChromeDriverManager().install())
+    return Chrome(service=chrome_service, options=chrome_options)
 
 
-def edge(download_dir: str, proxy: ProxyOption, executable_path: str = "msedgedriver"):
+def edge(download_dir: str, proxy: ProxyOption):
     edge_options = EdgeOptions()
-    edge_options.add_experimental_option("prefs", {
-        "download.default_directory": download_dir,
-        "download.prompt_for_download": False,
-        "download.directory_upgrade": True,
-    })
+    prefs = _build_prefs(download_dir)
+    edge_options.add_experimental_option("prefs", prefs)
     if proxy:
         edge_options.add_argument(f"--proxy-server={proxy.get_proxy_server()}")
     edge_options.add_argument("--headless")
-    return Edge(executable_path=executable_path, options=edge_options)
+    edge_service = EdgeService(executable_path=EdgeChromiumDriverManager().install())
+    return Edge(service=edge_service, options=edge_options)
 
 
 def download_ts(driver, ts_link: TSLink, download_dir: str, ts_host_url: str):
