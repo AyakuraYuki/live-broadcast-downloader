@@ -4,3 +4,4 @@ webdriver-manager
 pysock
 requests
 requests[socks]
+websockets
