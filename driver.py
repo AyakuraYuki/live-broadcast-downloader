@@ -30,7 +30,7 @@ def _build_prefs(download_dir: str):
     return prefs
 
 
-def chrome(download_dir: str, proxy: ProxyOption):
+def chrome(download_dir: str, proxy: ProxyOption = None):
     chrome_options = ChromeOptions()
     if proxy:
         chrome_options.add_argument(f"--proxy-server={proxy.get_proxy_server()}")
@@ -41,7 +41,7 @@ def chrome(download_dir: str, proxy: ProxyOption):
     return Chrome(service=chrome_service, options=chrome_options)
 
 
-def edge(download_dir: str, proxy: ProxyOption):
+def edge(download_dir: str, proxy: ProxyOption = None):
     edge_options = EdgeOptions()
     if proxy:
         edge_options.add_argument(f"--proxy-server={proxy.get_proxy_server()}")
@@ -68,12 +68,5 @@ def process(driver, dest_dir: str, m3u8_url: str, host_url: str, min_wait: int =
     if '?' in m3u8_filename:
         m3u8_filename = m3u8_filename[:m3u8_filename.index('?')]
     ts_paths = parse_m3u8(m3u8_filename)
-    downloading = 0
     for path in alive_it(ts_paths, bar='fish', spinner='stars', length=60):
-        if download_ts(driver, path, dest_dir, host_url):
-            downloading += 1
-        if downloading == 50:
-            wait = random.randint(min_wait, max_wait)
-            print(f'[message] cool down in {wait} seconds')
-            sleep(wait)
-            downloading = 0
+        download_ts(driver, path, dest_dir, host_url)
