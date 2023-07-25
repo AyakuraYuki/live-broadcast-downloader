@@ -1,4 +1,8 @@
-# ts_downloader
+These scripts are deprecated because I rewrite it by Golang, please visit my new repo [go-live-broadcast-downloader](https://github.com/AyakuraYuki/go-live-broadcast-downloader).
+
+# live-broadcast-downloader
+
+> the original repo name is `ts_downloader`
 
 这是一个用来按 `m3u8` 文件提供的切片顺序下载切片文件的脚本，并不是用来按照 `m3u8` 链接自动合成视频文件的脚本。
 
