@@ -518,3 +518,6 @@ Temporary Items
 .apdisk
 
 .wdm
+
+.venv/
+venv/
